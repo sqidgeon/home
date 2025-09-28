@@ -1,8 +1,36 @@
 body {
     background-color: #161716;
     text-align: center;
+    
 }
 
 h1 {
     font-family: "roboto";
+}
+
+.navbar ul {
+        text-decoration: none;
+        padding: 0px;
+        font-weight: 500;
+        font-size: 30px;
+        list-style-type: none;
+        overflow: hidden;
+        margin-top: 5px;
+        margin-right: 20px;
+        font-family: "roboto";
+}
+
+.navbar a{
+    text-align: center;
+    padding: 15px;
+    display: block;
+    color: lightgray;
+}
+
+.navbar a:hover{
+    color: grey;
+}
+
+.navbar li{
+    float:right;
 }
