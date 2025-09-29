@@ -19,8 +19,8 @@
 
     <!-- Nav Links -->
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#bio" id="bioLink">Bio</a></li>
+      <li><a href="#home" id="Homelink">Home</a></li>
+      <li><a href="#about" id="bioLink">About</a></li>
       <li><a href="#skills">Skills</a></li>
     </ul>
 
@@ -70,33 +70,49 @@
   </div>
 
   <!-- About section placeholder -->
-  <section id="about" style="height: 600px;"></section>
+  <section id="about" style="height: 550px;"></section>
 
   <!-- Bio Section -->
-  <section id="bio" class="bio-section">
+  <section id="home" class="bio-section">
     <img src="profilepicture.png" alt="Sqidgeon Profile Picture" class="profile-pic" />
 
     <div class="bio-right">
       <div class="bio-content">
         <h2>About Me</h2>
         <p>
-          I'm Sqidgeon, a curious and passionate developer focused on creating modern web experiences.
-          I enjoy building interactive UIs, exploring open-source, and learning new technologies.
+          Hey! I'm Sqidgeon, a curious and passionate beginner developer focused on improving my skills by coding. I am self taught and
+          mostly used youtube to learn.
         </p>
       </div>
 
       <div class="bio-details">
         <div class="bio-detail-box">
-          <strong>Education:</strong> Self-Taught Developer
+          <div class="bio-box-emoji">🌎</div>
+          <div class="bio-box-content">
+            <div class="bio-box-title">Language</div>
+            <div class="bio-box-text">English</div>
+          </div>
         </div>
         <div class="bio-detail-box">
-          <strong>Location:</strong> Earth, Milky Way 🌍
+          <div class="bio-box-emoji">📍</div>
+          <div class="bio-box-content">
+            <div class="bio-box-title">Location</div>
+            <div class="bio-box-text">England</div>
+          </div>
         </div>
         <div class="bio-detail-box">
-          <strong>Interests:</strong> Gaming, Open Source, Modding
+          <div class="bio-box-emoji">🎮</div>
+          <div class="bio-box-content">
+            <div class="bio-box-title">Interests</div>
+            <div class="bio-box-text">Coding</div>
+          </div>
         </div>
         <div class="bio-detail-box">
-          <strong>Languages:</strong> JavaScript, HTML/CSS, Java
+          <div class="bio-box-emoji">💻</div>
+          <div class="bio-box-content">
+            <div class="bio-box-title">Coding Languages</div>
+            <div class="bio-box-text">HTML/CSS</div>
+          </div>
         </div>
       </div>
     </div>
@@ -107,22 +123,31 @@
 
   <script>
     const burger = document.getElementById('burger');
-    const navLinks = document.getElementById('navLinks');
-    const bioLink = document.getElementById('bioLink');
+const navLinks = document.getElementById('navLinks');
 
-    burger.addEventListener('click', () => {
-      navLinks.classList.toggle('nav-active');
-      burger.classList.toggle('active'); // This toggles the X animation
-    });
+burger.addEventListener('click', () => {
+  navLinks.classList.toggle('nav-active');
+  burger.classList.toggle('active');
+});
 
-    // Smooth scroll to bio section on Bio link click
-    bioLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.getElementById('bio').scrollIntoView({ behavior: 'smooth' });
-      // Close menu on mobile after click
-      navLinks.classList.remove('nav-active');
-      burger.classList.remove('active');
-    });
+const aboutLink = document.querySelector('a[href="#about"]');
+aboutLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+  navLinks.classList.remove('nav-active');
+  burger.classList.remove('active');
+});
+
+const homeLink = document.querySelector('a[href="#home"]');
+homeLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  navLinks.classList.remove('nav-active');
+  burger.classList.remove('active');
+});
+
+
+
   </script>
 </body>
 </html>
