@@ -1,36 +1,181 @@
+/* === Your existing styles === */
+
 body {
-    background-color: #161716;
-    text-align: center;
-    
+  background-color: #161716;
+  text-align: center;
 }
 
 h1 {
-    font-family: "roboto";
+  font-family: "Roboto", sans-serif;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  position: relative;
+}
+
+.logo a {
+  text-decoration: none;
+  font-size: 40px;   /* larger size to match your original */
+  line-height: 1;
+  display: inline-block;
+}
+
+.logo span:first-child {
+  color: #ffffff;
+}
+
+.logo span:last-child {
+  color: #B49FDD;
+}
+
 
 .navbar ul {
-        text-decoration: none;
-        padding: 0px;
-        font-weight: 500;
-        font-size: 30px;
-        list-style-type: none;
-        overflow: hidden;
-        margin-top: 5px;
-        margin-right: 20px;
-        font-family: "roboto";
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  font-weight: 500;
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
 }
 
-.navbar a{
-    text-align: center;
+.navbar li {
+  margin-left: 20px;
+}
+
+.navbar a {
+  color: lightgray;
+  text-decoration: none;
+  padding: 15px;
+  display: block;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: grey;
+}
+
+/* === Burger menu styles === */
+
+.burger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+}
+
+.burger span {
+  display: block;
+  height: 3px;
+  background-color: lightgray;
+  border-radius: 3px;
+  transition: all 0.4s ease;
+  transform-origin: center;
+}
+
+/* Burger to cross animation */
+
+.burger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* === Responsive styles === */
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 80px;
+    right: 30px;
+    background-color: #1f1f1f;
+    border: 1px solid #444;
     padding: 15px;
-    display: block;
-    color: lightgray;
+    border-radius: 8px;
+    flex-direction: column;
+    width: 150px;
+    
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .nav-links.nav-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-links li {
+    margin: 15px 0;
+  }
+
+  /* Hide default nav and show burger */
+  .nav-links {
+    display: flex;
+  }
+
+  .burger {
+    display: flex;
+  }
 }
 
-.navbar a:hover{
-    color: grey;
+/* === New styles for circular images with dark background and glow === */
+
+.image-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }
 
-.navbar li{
-    float:right;
+.circle-wrapper {
+  width: 75px;
+  height: 75px;
+  background-color: #3a3a3a; /* dark grey background */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 
+    background-color 0.3s ease, 
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 0 10px #B49FDD; /* subtle glow */
+}
+
+.circle-wrapper:hover {
+  background-color: #B49FDD; /* lighter dark grey on hover */
+  transform: scale(1.1); /* scale entire button */
+}
+
+.circle-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(100%) brightness(150%);
+  transition: filter 0.3s ease, color 0.3s ease;
+  color: #bbbbbb; /* affects SVG fill via currentColor */
+}
+
+.circle-wrapper:hover .circle-img {
+  filter: grayscale(0%) brightness(100%);
+  color: #ffffff;
 }
