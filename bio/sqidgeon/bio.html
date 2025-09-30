@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bio | Sqidgeon.Dev</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="biostyle.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <h1><a href="/index.html"><span>Sqidgeon</span><span class="dotdev">.Dev</span></a></h1>
+    </div>
+  </nav>
+
+<section class="center-box">
+  <div class="content-card">
+    <img src="profilepic.png" alt="Sqidgeon's Profile" class="profile-img" />
+
+    <h2>Hii, I'm Sqidgeon</h2>
+    <p class="description">o/ I love Cats <3</p>
+
+    <div class="image-row">
+      <a href="https://github.com/sqidgeon" target="_blank" rel="noopener noreferrer" class="circle-wrapper" aria-label="Sqidgeon">
+        <img src="https://logo.svgcdn.com/s/github-dark.svg" alt="Modrinth Logo" class="circle-img" width="80" height="80" />
+      </a>
+
+      <a href="https://modrinth.com/user/sqidgeon" target="_blank" rel="noopener noreferrer" class="circle-wrapper" aria-label="Modrinth">
+        <img src="https://logo.svgcdn.com/s/modrinth-dark.svg" alt="Modrinth Logo" class="circle-img" width="80" height="80" />
+      </a>
+
+      <a href="https://www.curseforge.com/members/sqidgeon" target="_blank" rel="noopener noreferrer" class="circle-wrapper" aria-label="CurseForge">
+        <img src="https://logo.svgcdn.com/s/curseforge-dark.svg" alt="CurseForge Logo" class="circle-img" width="80" height="80" />
+      </a>
+
+      <a href="https://steamcommunity.com/id/mehcatmod" target="_blank" rel="noopener noreferrer" class="circle-wrapper steam" aria-label="Steam">
+        <img src="https://logo.svgcdn.com/s/steam-dark.svg" alt="Steam Logo" class="circle-img" width="80" height="80" />
+      </a>
+    </div>
+          <div class="audio-player">
+          <button id="play-pause" aria-label="Play/Pause">Pause Audio</button>
+          <audio id="background-audio" src="biosfx.mp3" autoplay loop></audio>
+  </div>
+</section>
+
+  <canvas id="snow-canvas"></canvas>
+  <script>const canvas = document.getElementById('snow-canvas');
+const ctx = canvas.getContext('2d');
+
+let width, height;
+function resize() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const snowflakesCount = 300;  // Increase number for more snow
+
+const snowflakes = [];
+for (let i = 0; i < snowflakesCount; i++) {
+  snowflakes.push({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    radius: Math.random() * 3 + 1,
+    speedY: Math.random() * 1 + 0.5,
+    speedX: (Math.random() - 0.5) * 0.5,
+    opacity: 1,
+  });
+}
+
+function drawSnowflake(snowflake) {
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(255, 255, 255, ${snowflake.opacity})`;
+  ctx.shadowColor = 'white';
+  ctx.shadowBlur = 5;
+  ctx.arc(snowflake.x, snowflake.y, snowflake.radius, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function updateSnowflakes() {
+  ctx.clearRect(0, 0, width, height);
+  
+  for (const flake of snowflakes) {
+    flake.y += flake.speedY;
+    flake.x += flake.speedX;
+    
+    // Fade out as they approach bottom
+    let fadeStart = height * 0.75; // start fading at 75% of height
+    if (flake.y > fadeStart) {
+      flake.opacity = Math.max(0, 1 - (flake.y - fadeStart) / (height - fadeStart));
+    }
+    
+    // Reset if completely faded or out of view
+    if (flake.y > height || flake.opacity <= 0) {
+      flake.x = Math.random() * width;
+      flake.y = 0;
+      flake.opacity = 1;
+      flake.radius = Math.random() * 3 + 1;
+      flake.speedY = Math.random() * 1 + 0.5;
+      flake.speedX = (Math.random() - 0.5) * 0.5;
+    }
+    
+    drawSnowflake(flake);
+  }
+  
+  requestAnimationFrame(updateSnowflakes);
+}
+
+updateSnowflakes();
+
+const audio = document.getElementById('background-audio');
+const playPauseBtn = document.getElementById('play-pause');
+const progress = document.getElementById('progress');
+
+// Autoplay on page load
+audio.play().then(() => {
+  playPauseBtn.textContent = 'Pause Audio';
+}).catch(e => {
+  // In case autoplay is blocked by browser
+  console.log('Autoplay prevented:', e);
+  playPauseBtn.textContent = 'Play Audio';
+});
+
+// Play or pause audio on button click
+playPauseBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    playPauseBtn.textContent = 'Pause Audio';
+  } else {
+    audio.pause();
+    playPauseBtn.textContent = 'Play Audio';
+  }
+});
+
+
+// Seek audio when progress bar is changed
+progress.addEventListener('input', () => {
+  if (audio.duration) {
+    audio.currentTime = (progress.value / 100) * audio.duration;
+  }
+});
+
+</script>
+
+</body>
+</html>
